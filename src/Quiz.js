@@ -5,6 +5,11 @@ import QuizEnd from "./QuizEnd";
 let quizData = require("./quiz_data.json");
 
 class Quiz extends Component {
+  handleResetClick() {
+    this.setState({
+      quiz_position: 1,
+    });
+  }
   showNextQuestion() {
     this.setState({ quiz_position: this.state.quiz_position + 1 });
   }
@@ -18,7 +23,7 @@ class Quiz extends Component {
   render() {
     const isQuizEnd = this.state.quiz_position - 1 === quizData.quiz_questions.length;
 
-    return <div>{isQuizEnd ? <QuizEnd /> : <QuizQuestion showNextQuestionHandler={this.showNextQuestion.bind(this)} quiz_question={quizData.quiz_questions[this.state.quiz_position - 1]} />}</div>;
+    return <div>{isQuizEnd ? <QuizEnd resetClickHandler={this.handleResetClick.bind(this)} /> : <QuizQuestion showNextQuestionHandler={this.showNextQuestion.bind(this)} quiz_question={quizData.quiz_questions[this.state.quiz_position - 1]} />}</div>;
   }
 }
 
